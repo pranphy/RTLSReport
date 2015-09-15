@@ -1,0 +1,52 @@
+
+\begin{ganttchart}[y unit title=0.4cm,
+y unit chart=0.5cm,
+vgrid,hgrid, 
+title label anchor/.style={below=-1.6ex},
+title left shift=.05,
+title right shift=-.05,
+title height=1,
+bar/.style={fill=gray!50},
+incomplete/.style={fill=white},
+progress label text={},
+bar height=0.7,
+group right shift=0,
+group top shift=.6,
+group height=.3,
+group peaks={}{}{.2}]{20}
+%labels
+\gantttitle{2014}{2}
+\gantttitle{2015}{18}\\
+\gantttitle{Dec}{2}
+\gantttitle{Jan}{2} 
+\gantttitle{Feb}{2} 
+\gantttitle{March}{2} 
+\gantttitle{April}{2} 
+\gantttitle{May}{2} 
+\gantttitle{June}{2}
+\gantttitle{July}{2}
+\gantttitle{Aug}{2}
+\gantttitle{Sept}{2}\\
+%tasks
+\ganttbar[progress=100]{Concept Note}{2}{2}\\
+\ganttbar[progress=100]{Submit Proposal}{2}{2}\\
+\ganttbar[progress=90]{Studies}{1}{4}\\
+\ganttbar[progress=95]{Collect Component}{3}{5}\\
+\ganttbar[progress=100]{Measure Distance}{6}{9}\\
+\ganttbar[progress=20]{Trilateration}{10}{12}\\
+\ganttbar[progress=10]{Trial Automation}{13}{16}\\
+\ganttbar[progress=10]{Test System}{17}{17}\\
+\ganttbar[progress=30]{Documentation}{17}{18}\\
+\ganttbar[progress=0]{Presentation}{19}{19}
+%~ %relations 
+\ganttlink{elem0}{elem1} 
+\ganttlink{elem0}{elem3} 
+\ganttlink{elem3}{elem4} 
+\ganttlink{elem3}{elem5}
+\ganttlink{elem4}{elem5} 
+\ganttlink{elem2}{elem4} 
+\ganttlink{elem2}{elem5} 
+\ganttlink{elem5}{elem6} 
+\ganttlink{elem6}{elem7} 
+\end{ganttchart}
+

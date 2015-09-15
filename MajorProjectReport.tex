@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author        : @PrakashGautam      %%
+%% Date Written	 : December 30, 2014   %%
+%% Last Updated  : August 16, 2015     %%
+%% Editor Used   : gVim v 7.30         %% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+\usepackage[top=35mm,left=35mm,bottom=20mm,right=20mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+%
+%
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{pgfgantt}
+\usepackage{hyperref}
+\hypersetup{colorlinks = false}
+\hypersetup{pdfborder = {0 0 0}}
+\graphicspath{Images/}
+%
+\usepackage{listings}
+%
+\makeatletter
+	\def\input@path{{include/}}
+\makeatother
+%
+
+\parskip=1\baselineskip
+\parindent = 0pt 
+%
+\usepackage{titlesec,titleps}
+%
+\titleformat{\section}[hang]{\bfseries\large}{\thesection.}{1em}{\MakeUppercase}
+\titlespacing*{\section}{0pt}{1\baselineskip}{1\baselineskip}
+%
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
+%
+\renewpagestyle{plain}{%
+	\sethead{}{\itshape\sectiontitle}{\thepage}
+	\setfoot{}{}{}
+}
+%
+\renewcommand{\baselinestretch}{1.5} 
+
+
+\usepackage[acronym,nomain]{glossaries} 
+%
+\makeglossaries
+\input{ListingColour.tex}%
+\input{Acronyms.tex}%
+%
+%
+%
+\begin{document}%
+%
+%
+\input{FrontMatter.tex}%
+%
+\newpage
+%\printacronyms[include-classes=abbrev,name=Abbreviations]
+%
+\input{Introduction.tex}%
+%
+\newpage
+%
+\input{ProposedSystemBlockDiagram.tex}%
+%
+\newpage
+%
+\input{LiteratureReview.tex}%
+%
+\newpage
+%
+\input{Methodology.tex}%
+%
+\newpage
+%
+\input{Implementation.tex}%
+%
+\newpage
+%
+\input{ComponentsUsed.tex}%
+%
+\newpage
+%
+\input{SoftwaresAndToolsUsed.tex}%
+%
+\newpage
+%	
+%\input{OverallCircuitDescription.tex}%
+%
+\input{Applicatoin.tex}%
+%
+%
+\input{TimeFrame.tex}%
+%
+\newpage
+%
+\bibliographystyle{ieeetr}
+\bibliography{Bibliographies.bib}
+\nocite{Ashutosh,1003.1833,IntelligentTransport,FisherTorin,PabloJavier,Yanying}
+\end{document}

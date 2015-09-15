@@ -1,0 +1,42 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[top=35mm,left=35mm,bottom=20mm,right=20mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{pgfgantt}
+\usepackage{hyperref}
+\hypersetup{colorlinks = true}
+\hypersetup{pdfborder = {0 0 0}}
+\graphicspath{Images}
+
+\makeatletter
+\def\input@path{{include/}}
+\makeatother
+
+\parskip=1\baselineskip
+\parindent = 0pt
+
+\usepackage{titlesec,titleps}
+
+\titleformat{\section}[hang]{\bfseries\large}{\thesection.}{1em}{\MakeUppercase}
+\titlespacing*{\section}{0pt}{1\baselineskip}{1\baselineskip}
+
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
+
+\renewpagestyle{plain}{%
+\sethead{}{\itshape\sectiontitle}{\thepage}
+\setfoot{}{}{}
+}
+
+\renewcommand{\baselinestretch}{1.5} 
+
+
+\begin{document}
+
+\input{Body.tex}
+
+\end{document}

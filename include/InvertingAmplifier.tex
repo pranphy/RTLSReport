@@ -1,0 +1,20 @@
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz}[scale=0.75,transform shape] \draw
+		(4,-.5) node[op amp](opamp1) {}
+		
+		(1,0) node[anchor=east] {$V_{in}$}	
+		to [R=$R_g$,o-*] (opamp1.-)
+		to [short](2.8,1)
+		to [R=$R_f$] (5.2,1)
+		to [short,-*] (opamp1.out)
+		
+		(opamp1.out) to [short,-o] (6.2,-0.5)
+		node[anchor=west] {$V_{out}$}
+		(opamp1.+) to [short] ($(opamp1.+)+(0,-1)$)node [ground] {}
+		;
+		
+	\end{circuitikz}
+	\caption{A negative feedback inverting Amplifier}
+	\label{fig:InvertingAmplifier}
+\end{figure}

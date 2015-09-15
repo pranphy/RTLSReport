@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author        : @PrakashGautam      %%
+%% Date Written	 : December 30, 2014   %%
+%% Last Updated  : December 30, 2014   %%
+%% Editor Used   : gVim v 7.30         %% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt, a4paper]{article}
+\usepackage[
+top=3.5cm,
+bottom=2cm,
+left=3.5cm,
+right=2cm,
+headsep=1.5cm,
+]{geometry}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{pgfgantt}
+\usepackage{hyperref}
+\hypersetup{colorlinks = true}
+\hypersetup{pdfborder = {0 0 0}}
+
+
+
+\usepackage{titlesec,titleps}
+
+\titleformat{\section}[hang]{\bfseries\large}{\thesection.}{1em}{\MakeUppercase}
+\titlespacing*{\section}{0pt}{1\baselineskip}{1\baselineskip}
+
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
+
+\renewpagestyle{plain}{%
+\sethead{}{\itshape\sectiontitle}{\thepage}
+\setfoot{}{}{}
+}
+
+
+\renewcommand{\baselinestretch}{1.5} 
+
+\begin{document}
+
+\input{include/Body.tex}
+
+\end{document} 

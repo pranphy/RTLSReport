@@ -1,0 +1,28 @@
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz}[scale=0.75,transform shape] \draw
+		(4,-.5) node[op amp](opamp1) {}
+		(9,-.5) node[op amp](opamp2) {}
+		
+		(1,0) node[anchor=east] {$V_{in}$}	
+		to [R=$R_1$,o-*] (opamp1.-)
+		to [short](2.8,1)
+		to [R=$R_2$] (5.2,1)
+		to [short,-*] (opamp1.out)
+		
+		(opamp1.out) to [R=$R_3$] (7.8,-0.5)
+		to [short,-*] (opamp2.-)
+		to [short] (7.8,1)
+		to [R=$R_4$] (10.2,1)
+		to [short,-*] (opamp2.out)
+		
+		(opamp2.out) to [short,-o] (12,-0.5)
+		node[anchor=west] {$V_{out}$}
+		(opamp1.+) to [short] ($(opamp1.+)+(0,-1)$)node [ground] {}		
+		(opamp2.+) to [short] ($(opamp2.+)+(0,-1)$)node [ground] {}
+		;
+		
+	\end{circuitikz}
+	\caption{Two Stage Amplifier}
+	\label{fig:TwoStageAmplifier}
+\end{figure}

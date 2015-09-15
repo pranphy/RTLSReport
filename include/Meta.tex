@@ -1,0 +1,30 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[
+top=3.5cm,
+bottom=2cm,
+left=3.5cm,
+right=2cm,
+headsep=1.5cm,
+]{geometry}
+\usepackage{graphicx}
+
+\usepackage{mathptmx}
+
+\parskip=1\baselineskip
+\parindent = 0pt
+
+\usepackage{titlesec, titleps}
+
+\titleformat{\section}[hang]{\bfseries\large}{\thesection.}{1em}{\MakeUppercase}
+\titlespacing*{\section}{0pt}{1\baselineskip}{1\baselineskip}
+
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
+
+\renewpagestyle{plain}{%
+\sethead{}{\itshape\sectiontitle}{\thepage}
+\setfoot{}{}{}
+}
+
+
+\pagestyle{plain}
