@@ -78,10 +78,9 @@ In Figure.\ref{fig:UltrasonicTransception} the lower signal with regular spikes 
 Since the received signal is noisy and very low power, it requires to be amplified and filtered for the required frequency.
 \subsection{Signal Amplification}
 
-The received sound signal is converted
-by into electrical signal by ultrasonic receiver. Since the sound undergoes massive attenuation in air, the received signal is pretty low in voltage and needs to be amplified in order to use it for distance measurement. 
+The received sound signal is converted into electrical signal by ultrasonic receiver. Since the sound undergoes massive attenuation in air, the received signal is pretty low in voltage and needs to be amplified in order to use it for distance measurement. 
 
-An amplifier is an electronic device that increases the power of a signal. An operational amplifier ("op-amp") is a \gls{dc} coupled high-gain electronic voltage amplifier with a differential input and, usually, a single-ended output. In the configuration as shown in Figure.\ref{fig:InvertingAmplifier}, an op-amp produces a output potential that is typically hundreds of thousands of times larger than the potential difference between its input terminals. 
+An amplifier is an electronic device that increases the power of a signal. An operational amplifier ("op-amp") is a DC-coupled high-gain electronic voltage amplifier with a differential input and, usually, a single-ended output. In the configuration as shown in \ref{fig:InvertingAmplifier}, an op-amp produces a output potential that is typically hundreds of thousands of times larger than the potential difference between its input terminals. 
 
 \input{InvertingAmplifier.tex}
 
@@ -93,12 +92,28 @@ The output voltage of this operational amplifier closed loop negative feedback i
 
 Where,\\ $R_f$ is feedback resistor \\$R_g$ is input resistance. \\$V_{in}$ is input voltage, \\$V_{out}$ is output voltage. 
 
-The gain of the amplifier is controlled by two resistors, $R_f$ and $R_g$. The gain is the ratio of the feedback resistor to the input resistor. However, the opamp we used,i.e. UA741 has a maximum practical gain of 2.5 dB only. Since the electrical signal produced by the ultrasonic receiver is pretty low in voltage, it needs to be amplified by using a two-stage amplifier. The circuit diagram for two stage amplifer is as shown in Figure.\ref{fig:TwoStageAmplifier}, where the output of one amplifier is fed as an input to the exactly same another amplifier circuit.
+The gain of the amplifier is controlled by two resistors, $R_f$ and $R_g$. The gain is the ratio of the feedback resistor to the input resistor. However, the opamp we used,i.e. IL741 has a maximum practical gain of 2.5 dB only. Since the electrical signal produced by the ultrasonic receiver is pretty low in voltage, it needs to be amplified with amplifier having very high gain. This task of amplifying the received pretty low voltage signal is carried out by an instrumentation amplifier. The circuit diagram for instrumentation amplifer is as shown in \ref{fig:InstrumentationAmplifier}
 
-\input{TwoStageAmplifier.tex}
+\subsubsection{Instrumentation Amplifier}
+The main disadvantages of the differential amplifier or single operational amplifier are its low input impedances and low common mode rejection ratio \gls{cmrr}.  Such kind of problems can be solved by using instrumentation amplifier. Instrumentation amplifier is a high precision amplifier with an adjustable gain having high \gls{cmrr} and input impedance. It is a kind of differential amplifier with additional input buffers. It uses 3 operational amplifiers, the first two amplifier acts as the buffer which has very high input impedance and low output impedance and the latter one is used as a differential amplifier to amplify the signal applied to its input. The advantage of the input buffers stages makes it easy to match the impedance of the amplifier with the preceding stage. The inputs are applied to the first two operational amplifiers. The difference in the applied signal is only amplified by the amplifier but it rejects the common signal applied to its inputs. So whatever the environment is, the noise signal gets rejected. Its output impedance is very low so that there is low signal attenuation to transfer the whole amplified signal to the required circuit. Instrumentation amplifier is used for the higher accuracy and the stability of the circuit.
+
+\input{InstrumentationAmplifier.tex}
+
+The gain of the instrumentation amplifier is given as:
+\begin{equation}
+	\frac{V_{out}}{V_1-V_2}=(1+\frac{2R_1}{R_{gain}})\frac{R_3}{R_2}
+\end{equation}
+where, $V_1$ and $V_2$ are the signals applied to the non-inverting inputs of operational amplifiers. The gain of the amplifier can be adjusted by changing the resistor value $R_{gain}$. We have used a potentiometer in place of the $R_gain$ so that the value of the gain can be adjusted. For the simplification other resistor values are kept same. 
+
+Similarly, the \gls{cmrr} of the instrumentation amplifier can be written in terms of \gls{cmrr} of the single operational amplifier as:
+\begin{equation}
+	CMRR_{ins-amp}=(1+2\frac{R_1}{R_gain})CMRR_{op-amp} \nonumber
+\end{equation}
+Hence the \gls{cmrr} of the intrumentation amplifier is $(1+2\frac{R_1}{R_{gain}})$ times greater than that of a single operational amplifier.
+
 	
-	
-Thus the low voltage signal received through the receiver of ultrasonic senser was amplified using operational amplifier with negative feedback. The values of the component of this operational amplifier is calculated so that we could get the required signal strength. The amplified signal is now fed into the input of tone decoder circuit.
+Thus the low voltage signal received through the receiver of ultrasonic sensor is amplified using instrumentation amplifier circuit. The values of the component of this operational amplifier is calculated so that the required signal strength can be achieved. The amplified signal is now fed into the input of tone decoder circuit.
+
 
 \subsection{Signal Filtering}
 
@@ -153,7 +168,7 @@ We fed a 40kHz sinusoidal signal to the input of the IL567 from function generat
 	\label{fig:CircuitDiagramForToneDecoding}
 \end{figure}
 
-\subsection{Detection of incoming signal}
+\subsection{Detection of Incoming Signal}
 The ultrasonic receiver receives the 40kHz signal transmitted from the transmitter. This signal is amplified using a two stage operational amplifier. The output of the amplifier circuit is fed as an input to the IL567. Now, as soon as the output of the IL567 goes low, we can know that the incoming signal is the transmitted signal with frequency of 40kHz. Thus, this can operate as a bandpass filter at 40kHz.
 
 The output pin (Pin 8) on the LM567 Tone Decoder is connected to an input configured I/O pin on the microcontroller so that it is able to detect signals from the LM567 Tone Decoder. When the output pin (Pin 8) on the LM567 Tone Decoder is pulled low, the microcontroller knows that an ultrasonic signal has been received, and it stops running the counter and calculates the travel time of the signal.
@@ -167,6 +182,8 @@ Now equipped with all these stages we are finally able to calculate the distance
 	{}& = & x
 \end{eqnarray*}
 Thus we can find the actual distance $x$ by this process.
+
+\input{SPIandUSB.tex}
 
 \subsection{Circuit Realization}
 We have made the transmitter circuit which 

@@ -1,0 +1,33 @@
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz}[scale=0.7,transform shape] \draw
+		(4,4.5) node[op amp,,yscale=-1](opamp1) {}
+		(4,-2.5) node[op amp](opamp2) {}
+		(10,1) node[op amp](opamp3) {}
+		(1,5) node[anchor=east] {$V_1$}	
+		to [short,o-] (opamp1.+)
+		(1,-3) node[anchor=east] {$V_2$}	
+		to [short,o-] (opamp2.+)
+		(opamp1.out) to [R=$R_1$,*-*] ($(opamp1.out)+(0,-2)$)
+		to [R=$R_{gain}$,*-*] ($(opamp1.out)+(0,-5)$)
+		to [R=$R_1$,*-*] (opamp2.out)
+		($(opamp1.out)+(0,-2)$) to [short] ($(opamp1.-)+(0,-1.5)$)
+		to [short] (opamp1.-)
+		($(opamp1.out)+(0,-5)$) to [short] ($(opamp2.-)+(0,1.5)$)
+		to [short] (opamp2.-)
+		(opamp1.out) to [R=$R_2$,*-*] ($(opamp3.-)+(0,3)$)
+		to [short] (opamp3.-)
+		(opamp2.out) to [R=$R_2$,*-*] ($(opamp3.+)+(0,-3)$)
+		to [short] (opamp3.+)
+		($(opamp3.-)+(0,3)$) to [R=$R_3$,*-] ($(opamp3.out)+(0,3.5)$)
+		to [short] (opamp3.out)
+		($(opamp3.+)+(0,-3)$) to [R=$R_3$,*-] ($(opamp3.out)+(0,-3.5)$)
+		node[ground] {}
+		(opamp3.out) to [short,*-o] ($(opamp3.out)+(2,0)$)
+		node[right] {$V_3$}
+		;
+		
+	\end{circuitikz}
+	\caption{Instrumentation Amplifier}
+	\label{fig:InstrumentationAmplifier}
+\end{figure}

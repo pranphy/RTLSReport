@@ -10,6 +10,7 @@
 \setmainfont{Times New Roman}
 %
 %
+
 \usepackage{epstopdf}
 \usepackage{graphicx}
 \usepackage{pstricks}
@@ -17,7 +18,7 @@
 \usepackage{circuitikz}
 \usepackage{pgfgantt}
 \usepackage{hyperref}
-\hypersetup{colorlinks = false}
+\hypersetup{colorlinks = true}
 \hypersetup{pdfborder = {0 0 0}}
 \graphicspath{Images/}
 %
@@ -47,10 +48,12 @@
 \renewcommand{\baselinestretch}{1.5} 
 
 
+
 \usepackage[acronym,nomain]{glossaries} 
 %
 \makeglossaries
-\input{ListingColour.tex}%
+%\input{ListingColour.tex}%
+%\renewcommand{\gls}[1]{{\uppercase {#1}}}
 \input{Acronyms.tex}%
 %
 %

@@ -23,23 +23,7 @@ where $t_{rt}$ is the round trip time of the signal travel.
 
 \subsubsection{\gls{aoa}} 
 With respect to \gls{aoa} based techniques , the reference nodes or the target node has the capability of measuring the angle of arrival based on information obtained. For this purpose, techniques like angle diversity may be utilized in order to exploit the directionality of the receiver. Usually, direction finding can be accomplished by either with directional antennas or with an array of antennas. The main  principle behind the \gls{aoa} measurement via antenna arrays consists in that differences in arrival times of an incoming signal at different antenna elements include the angle information given that the array geometry is known. With \gls{aoa}, no time synchronization between nodes is required.\cite{1003.1833}
-\subsection{Trilateration}
-Trilateration is the technique utilized to find the co-ordinate of any point with the distance of the point given from fixed known points.	
-
-\begin{figure}[htpb]
-	\centering
-	\scalebox{.4}{\includegraphics{./Images/Trilateration.png}}
-	\caption{Trilateration}
-	\label{fig:Trilateration}
-\end{figure}
-If in figure \ref{fig:Trilateration} the Point to be located is $P$ and the distance of $P$ from $A$ ,$B$ and $C$ is known respectively to be $d_1$, $d_2$, and $d_3$ to us.If we know the coordinate of the points $A(x_1,y_1,z_1)$ ,$B(x_2,y_2,z_2)$ and $C(x_3,y_3,z_3)$ then the coordinate $(x,y,z)$ of the point $P$ can be calculated from the set of equations:
-
-\begin{eqnarray*}
-	(x-x_1)^2+(y-y_1)^2+(z-z_1)^2 &=& d_1^2\\
-	(x-x_2)^2+(y-y_2)^2+(z-z_2)^2 &=& d_2^2\\
-	(x-x_3)^2+(y-y_3)^2+(z-z_3)^2 &=& d_3^2\\			
-\end{eqnarray*} 
-	Solving these three equation provides us with the coordinate of the point.
+\input{Trilateration.tex}
 	\subsection{Control/Notification}
 		As soon as the vehicle stops at unallowed locations in the track, or if it moves in the position to be stopped, an immediate notification will be given to the driver and s/he will be disqualified from further license processing as per the rules of Vehicle Management Department, Government of Nepal.
 
