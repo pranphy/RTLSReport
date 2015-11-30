@@ -1,4 +1,5 @@
 \subsection{Trilateration}
+\subsection{Trilateration}
 Trilateration is the technique utilized to find the co-ordinate of any point with the distance of the point given from fixed known points.	
 
 \begin{figure}[htpb]
@@ -8,7 +9,7 @@ Trilateration is the technique utilized to find the co-ordinate of any point wit
 	\label{fig:Trilateration}
 \end{figure}
 
-If in figure \ref{fig:Trilateration} the Point to be located is $P$ and the distance of $P$ from $A$ ,$B$ and $C$ is known respectively to be $r_1$, $r_2$, and $r_3$ to us.If we know the coordinate of the points $A(x_1,y_1,z_1)$ ,$B(x_2,y_2,z_2)$ and $C(x_3,y_3,z_3)$ then the coordinate $(x,y,z)$ of the point $P$ can be calculated from the set of equations:
+If in figure \ref{fig:Trilateration} the Point to be located is $P$ and the distance of $P$ from $A$, $B$ and $C$ is known respectively to be $r_1$, $r_2$, and $r_3$ to us.If we know the coordinate of the points $A(x_1,y_1,z_1)$, $B(x_2,y_2,z_2)$ and $C(x_3,y_3,z_3)$ then the coordinate $(x,y,z)$ of the point $P$ can be calculated from the set of equations:
 
 
 In three dimensional geometry, when it is known that a point lies on the surfaces of three spheres, then the centers of the three spheres along with their radii provide sufficient information to narrow the possible locations down to no more than two(unless the centers lie on a straight line).
@@ -23,7 +24,7 @@ The intersections of the surfaces of three spheres is found by formulating the e
 
 To simplify the calculations, the equations are formulated so that the centers of the spheres lie on $z=0$ plane. Also the formulation is such that location of one of the known points is origin and that of another known point is on the x-axis. Assuming this thing, we first calculate the location of the required unknown point and then the solution is transformed back to the original three dimensional Cartesian coordinate system.
 
-Therefore, the coordinates of three known points are : $P_1(0,0,0)$,$P_2(d,0,0)$ and $P_3(i,j,0)$. Now, equation \ref{equation1}, equation \ref{equation2} and equation \ref{equation3} become :
+Therefore, the coordinates of three known points are : $P_1(0,0,0)$, $P_2(d,0,0)$ and $P_3(i,j,0)$. Now, equation \ref{equation1}, equation \ref{equation2} and equation \ref{equation3} become :
 \begin{eqnarray}
 	\label{equation4}  x^2+y^2+z^2={r_1}^2 \\ 
 	\label{equation5} (x-d)^2+y^2+z^2={r_2}^2 \\ 
@@ -78,7 +79,7 @@ The unit vector in the direction from $P_1$ to $P_2$ is:
 \hat e_x = \frac{ P_2 - P_1 }{ \| P_2 - P_1 \| } \nonumber
 \end{equation}
 
-The signed magnitude of the x component,of the vector from $P_1$ to $P_3$ is:
+The signed magnitude of the x component, of the vector from $P_1$ to $P_3$ is:
 \begin{equation}
 i = \hat e_x \cdot ( P_3 - P_1 )  \nonumber
 \end{equation}

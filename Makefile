@@ -1,11 +1,11 @@
-Latex =  xelatex
-Bibtex = bibtex
-MakeGlossary = makeglossaries
-MakeIndex = makeindex
-FILE=MajorProjectReport
-BIBFILE=Bibliographies
+Latex         =  xelatex
+Bibtex        = bibtex
+MakeGlossary  = makeglossaries
+MakeIndex     = makeindex
+FILE          = MajorProjectReport
+BIBFILE       = Bibliographies
 
-PDF = $(FILE).pdf
+PDF           = $(FILE).pdf
 
 $(PDF):$(FILE).aux $(FILE).bbl $(FILE).log 
 	$(Latex) $(FILE).tex
@@ -21,7 +21,6 @@ clean:
 	$(FILE).bbl \
 	$(FILE).blg \
 	$(FILE).log \
-	$(FILE).synctex.gz \
 	$(FILE).lof \
 	$(FILE).toc \
 	$(FILE).out \

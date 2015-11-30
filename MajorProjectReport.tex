@@ -52,13 +52,13 @@
 \usepackage[acronym,nomain]{glossaries} 
 %
 \makeglossaries
-%\input{ListingColour.tex}%
+\input{ListingColour.tex}%
 %\renewcommand{\gls}[1]{{\uppercase {#1}}}
 \input{Acronyms.tex}%
 %
+
 %
-%
-\begin{document}%
+\begin{document}% 
 %
 %
 \input{FrontMatter.tex}%
@@ -94,15 +94,21 @@
 %
 \newpage
 %	
-%\input{OverallCircuitDescription.tex}%
+% //\input{OverallCircuitDescription.tex}%
 %
+\newpage
+\input{Results.tex}
+%
+\newpage
+\input{FinalCircuits.tex}%
+\newpage
 \input{Applicatoin.tex}%
 %
 %
-\input{TimeFrame.tex}%
-%
 \newpage
 %
+\input{Conclusion.tex}
+\newpage
 \bibliographystyle{ieeetr}
 \bibliography{Bibliographies.bib}
 \nocite{Ashutosh,1003.1833,IntelligentTransport,FisherTorin,PabloJavier,Yanying}

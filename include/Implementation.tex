@@ -1,7 +1,16 @@
 \section{Implementation}
 The implementation of distance measurement has been done by using the method of time of flight. There are two stations each mounted with transmitter and receiver module respectively. The transmitter module contains a ultrasonic transmitter and receiver section contains a ultrasonic receiver and we measure the time of flight of the sound signal that originates from the transmitter station ending up at the receiver station.
+\subsection{Transmitter Section}
+The transmitter module is run with a PWM generated form a microcontroller. The overall block diagram of transmitter section is given in Figure. \ref{fig:TransmitterBlock}
 
-\subsection{Synchronization}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=120mm]{Images/TransmitterBlock.png}
+	\caption{Transmitter Module Block Diagram}
+	\label{fig:TransmitterBlock}
+\end{figure}
+
+\subsubsection{Synchronization}
 Synchronization is the most crucial part of the whole process of distance measurement. The receiver must exactly know when the transmitter is going to send the incoming signal in order to have the prior knowledge to start the time within it. It is not possible to know when exactly the transmitter will send the incoming signal but we can achieve somewhat close approximation by the use of light transmitter and receiver. 
 
 The speed of light is approximately $3\times 10^8 m/s$. If we set up transmitter such that the transmitter station sends a pulse of light and sound at the same time, the light pulse reaches the receiver at no time compared to the sound pulse due to the massive difference of speed of each of these.
@@ -46,7 +55,7 @@ We thus place at the transmitter side a \gls{irled} and a ultrasonic signal tran
 \end{figure} 
 In Figure.\ref{fig:DetectionByTSOP} the upper waveform is the signal fed to the \gls{irled} transmitter and the lower waveform is the response of TSOP circuitory to the detected signal.
 
-\subsection{Ultrasound transmission}
+\subsubsection{Ultrasound Transmission}
 The ultrasonic transmitter typically works at a frequency of $40kHz$. So we generate the required signal using  a microcontroller. The microcontroller generates the required signal by pulling a particular pin at high and low at calculated intervals. Following piece of code is written in C for ATmega8 to generate 40kHz signal at a particular pin.
 
 \begin{lstlisting}
@@ -56,7 +65,7 @@ void DriveIRLED()
 	int i = 0;
 	for(;i< Peaks*2; i++) {
 		TOGGLE(PORTC,PC5);
-		_delay_us(4);
+		_delay_us(12);
 	}
 }
 \end{lstlisting}
@@ -75,8 +84,18 @@ In Figure.\ref{fig:UltrasonicTransception} the lower signal with regular spikes 
 	\label{fig:SignalBrust}
 \end{figure}
  
-Since the received signal is noisy and very low power, it requires to be amplified and filtered for the required frequency.
-\subsection{Signal Amplification}
+Since the received signal is noisy and very low power, it requires to be amplified and 
+filtered for the required frequency.
+\subsection{Receiver Section}
+The reciever section is collects thre signal transmitted by the transmitter module. The overall block diagram of the receiver module is given in Figure. \ref{fig:ReceiverOne}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=120mm]{Images/ReceiverOne.png}
+	\caption{Receiver Module Block Diagram}
+	\label{fig:ReceiverOne}
+\end{figure}
+
+\subsubsection{Signal Amplification}
 
 The received sound signal is converted into electrical signal by ultrasonic receiver. Since the sound undergoes massive attenuation in air, the received signal is pretty low in voltage and needs to be amplified in order to use it for distance measurement. 
 
@@ -115,7 +134,7 @@ Hence the \gls{cmrr} of the intrumentation amplifier is $(1+2\frac{R_1}{R_{gain}
 Thus the low voltage signal received through the receiver of ultrasonic sensor is amplified using instrumentation amplifier circuit. The values of the component of this operational amplifier is calculated so that the required signal strength can be achieved. The amplified signal is now fed into the input of tone decoder circuit.
 
 
-\subsection{Signal Filtering}
+\subsubsection{Signal Filtering}
 
 The transducer will pick up most sounds within a fairly wide range. Thus ultrasonic signal received by the receiver not just contain the 40kHz required signal. It also comprises of some other noise signals. To make sure the system only picks up the ultrasound signal that was transmitted, we need to lock the receiver onto a frequency of 40kHz. 
 
@@ -136,6 +155,7 @@ C = capacitor placed at Pin 6
 
 \begin{table}[h!]
 	\centering
+	\caption{Pin Description of IL567 \gls{ic}\cite{ToneDecoder}}
 	\begin{tabular}{|c|c|c|}
 		\hline 
 		\bf{Pin Number} & \bf{Symbol} & \bf{Description} \\ 
@@ -150,13 +170,12 @@ C = capacitor placed at Pin 6
 		08 & OUT & Output \\ 
 		\hline 
 	\end{tabular} 
-	\caption{Pin Description of IL567 \gls{ic}\cite{ToneDecoder}}
 \end{table}
 
 This IC sets it's output(Pin 8) to low when the frequency of incoming signal matches the frequency of internal oscillator. When there is incoming signal of other frequencies or there is no signal at all, the output(Pin 8) remains high. 
 We used a capacitor of 0.01$\mu$ F. In order to lock the frequency of internal oscillator at 40kHz, we need a resistor of approximately 2.272 K$\Omega$ . Now since exactly this value resistor was not available, we used a potentiometer of 10K instead of this resistor. 
 
-\subsection{Fixing the frequency of internal oscillator}
+\subsubsection{Fixing the frequency of internal oscillator}
 
 To make sure that the tone decoder recognizes 40kHz signal and sets it output to low only on the arrival of 40kHz signal, the frequency of it's internal oscillator needs to be fixed at 40kHz. Since we do not have exactly 2.272K$\Omega$ resistor available, we use a potentiometer to adjust the frequency of internal oscillator.
 
@@ -168,7 +187,7 @@ We fed a 40kHz sinusoidal signal to the input of the IL567 from function generat
 	\label{fig:CircuitDiagramForToneDecoding}
 \end{figure}
 
-\subsection{Detection of Incoming Signal}
+\subsubsection{Detection of Incoming Signal}
 The ultrasonic receiver receives the 40kHz signal transmitted from the transmitter. This signal is amplified using a two stage operational amplifier. The output of the amplifier circuit is fed as an input to the IL567. Now, as soon as the output of the IL567 goes low, we can know that the incoming signal is the transmitted signal with frequency of 40kHz. Thus, this can operate as a bandpass filter at 40kHz.
 
 The output pin (Pin 8) on the LM567 Tone Decoder is connected to an input configured I/O pin on the microcontroller so that it is able to detect signals from the LM567 Tone Decoder. When the output pin (Pin 8) on the LM567 Tone Decoder is pulled low, the microcontroller knows that an ultrasonic signal has been received, and it stops running the counter and calculates the travel time of the signal.
@@ -185,8 +204,28 @@ Thus we can find the actual distance $x$ by this process.
 
 \input{SPIandUSB.tex}
 
+\subsection{Communication between Microcontroller and PC}
+ V-USB is a very useful software-only implementation of low-speed USB device for AVR microcontrollers. It adds USB functionality for almost any AVR, particularly for those without hardware USB functionality. The communication with PC has two distinct parts:
+\begin{enumerate}
+	\item Firmware on Device
+	\item Host Driver Software on PC
+\end{enumerate}
+
+\subsubsection{Firmware}
+To make the interface to communicate with pc we have used VUSB library. This library helps to communicate data between PC and the microcontroller. The firmware does the necessary tasks required for preparation of putting the data in device buffer and send data to the PC following the \gls{usb} protocol. These data is sent to the PC through \gls{usb} cable.
+
+
+\subsubsection{Host Software}
+Once the data is received in the computer, the task remaining is to trace out the values on PC screen. For plotting this data into the screen as a function of time, we have prepared a graph plotting software ourselves, which plots the values received at the PC through \gls{usb} port into the display of the PC making the waveform of the input signals visible. 
+
+Host software again makes use of lib \gls{usb} library to make proper communication with the firmware on the device. A channel is formed between the host software and device through the \gls{usb} connection.
+
+
+The software interfaces are made in C++ programming language and compiled for Linux Operating system. But the programs are made platform independent and can be easily compiled for other operating systems with just minor changes.
+
+
 \subsection{Circuit Realization}
-We have made the transmitter circuit which 
+We have made the transmitter circuit which comprises of a \gls{pwm}Generator to transmit $40kHz$ ultrasonic signal as well as a $38kHz$ \gls{ir} signal.
 
 \begin{figure}
 	\centering
@@ -195,7 +234,7 @@ We have made the transmitter circuit which
 	\label{fig:PWMGenerator}
 \end{figure}
 
-The generated \gls{pwm} signal is fed to the Ultrasonic Transmitter, but signal sinking causes the signal to die out in the ultrasonic transmitter. So we have used a transistor to decouple the circuit from the ultrasonic transmitter. Figure.\ref{fig:Transmitter} shows the Ultrasonic transmitter attached to the output pin of \gls{pwm} generator in Atmega8/
+The generated \gls{pwm} signal is fed to the Ultrasonic Transmitter, but signal sinking causes the signal to die out in the ultrasonic transmitter. So we have used a transistor to decouple the circuit from the ultrasonic transmitter. Figure.\ref{fig:Transmitter} shows the Ultrasonic transmitter attached to the output pin of \gls{pwm} generator in Atmega8.
 \begin{figure}
 	\centering
 	\includegraphics{Images/Transmitter.eps}
@@ -221,3 +260,18 @@ Finally a \gls{pcb} is made for the transmitter which is shown in Figure.\ref{fi
 	\label{fig:TransmitterPCB}
 \end{figure}
 
+Similarly, there are three receivers which receive the signals transmitted from transmitter section in all three directions. \gls{pcb} for the receiver is shown in Figure.\ref{fig:ReceiverPCB}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=1]{Images/ReceiverModulePCB.eps}
+	\caption{\gls{pcb} of the Receiver Module}
+	\label{fig:ReceiverPCB}
+\end{figure}
+
+The receiver modules act as slave to transmit the distances to another microcontroller, which acts as a master. The implementation of master's module is as shown in Figure.\ref{fig:MasterModule}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.25]{Images/MasterModule.png}
+	\caption{3-D view of Master Module}
+	\label{fig:MasterModule}
+\end{figure}
