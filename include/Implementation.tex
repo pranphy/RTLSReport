@@ -53,7 +53,7 @@ We thus place at the transmitter side a \gls{irled} and a ultrasonic signal tran
 	\caption{TSOP response to detected IR signal by IRLED}
 	\label{fig:DetectionByTSOP}
 \end{figure} 
-In Figure.\ref{fig:DetectionByTSOP} the upper waveform is the signal fed to the \gls{irled} transmitter and the lower waveform is the response of TSOP circuitory to the detected signal.
+In Figure.\ref{fig:DetectionByTSOP} the upper waveform is the signal fed to the \gls{irled} transmitter and the lower waveform is the response of TSOP circuitry to the detected signal.
 
 \subsubsection{Ultrasound Transmission}
 The ultrasonic transmitter typically works at a frequency of $40kHz$. So we generate the required signal using  a microcontroller. The microcontroller generates the required signal by pulling a particular pin at high and low at calculated intervals. Following piece of code is written in C for ATmega8 to generate 40kHz signal at a particular pin.
@@ -76,18 +76,18 @@ void DriveIRLED()
 	\caption{Signal Transmission and Reception by Ultrasonic pair}
 	\label{fig:UltrasonicTransception}
 \end{figure}
-In Figure.\ref{fig:UltrasonicTransception} the lower signal with regular spikes is the signal applied to Ultrasonic transmitter. Each spike (contracted in time) is a brust of square wave pulses shown in Figure.\ref{fig:SignalBrust}. The interval of each burst is $2ms$. The upper signal in Figure.\ref{fig:UltrasonicTransception} is the response of Ultrasonic receiver to the obtained signal. There are clear spikes  detected at exactly the interval sent by the transmitter.
+In Figure.\ref{fig:UltrasonicTransception} the lower signal with regular spikes is the signal applied to Ultrasonic transmitter. Each spike (contracted in time) is a burst of square wave pulses shown in Figure.\ref{fig:SignalBrust}. The interval of each burst is $2ms$. The upper signal in Figure.\ref{fig:UltrasonicTransception} is the response of Ultrasonic receiver to the obtained signal. There are clear spikes  detected at exactly the interval sent by the transmitter.
 \begin{figure}
 	\centering
 	\includegraphics[width=120mm]{Images/SignalBrust.jpg}
-	\caption{40kHz Signal Brust applied at ultrasonic transmitter}
+	\caption{40kHz Signal Burst applied at ultrasonic transmitter}
 	\label{fig:SignalBrust}
 \end{figure}
  
 Since the received signal is noisy and very low power, it requires to be amplified and 
 filtered for the required frequency.
 \subsection{Receiver Section}
-The reciever section is collects thre signal transmitted by the transmitter module. The overall block diagram of the receiver module is given in Figure. \ref{fig:ReceiverOne}
+The receiver section collects the signal transmitted by the transmitter module. The overall block diagram of the receiver module is given in Figure. \ref{fig:ReceiverOne}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=120mm]{Images/ReceiverOne.png}
@@ -111,10 +111,10 @@ The output voltage of this operational amplifier closed loop negative feedback i
 
 Where,\\ $R_f$ is feedback resistor \\$R_g$ is input resistance. \\$V_{in}$ is input voltage, \\$V_{out}$ is output voltage. 
 
-The gain of the amplifier is controlled by two resistors, $R_f$ and $R_g$. The gain is the ratio of the feedback resistor to the input resistor. However, the opamp we used,i.e. IL741 has a maximum practical gain of 2.5 dB only. Since the electrical signal produced by the ultrasonic receiver is pretty low in voltage, it needs to be amplified with amplifier having very high gain. This task of amplifying the received pretty low voltage signal is carried out by an instrumentation amplifier. The circuit diagram for instrumentation amplifer is as shown in \ref{fig:InstrumentationAmplifier}
+The gain of the amplifier is controlled by two resistors, $R_f$ and $R_g$. The gain is the ratio of the feedback resistor to the input resistor. However, the opamp we used,i.e. IL741 has a maximum practical gain of 2.5 dB only. Since the electrical signal produced by the ultrasonic receiver is pretty low in voltage, it needs to be amplified with amplifier having very high gain. This task of amplifying the received pretty low voltage signal is carried out by an instrumentation amplifier. The circuit diagram for instrumentation amplifier is as shown in \ref{fig:InstrumentationAmplifier}
 
 \subsubsection{Instrumentation Amplifier}
-The main disadvantages of the differential amplifier or single operational amplifier are its low input impedances and low common mode rejection ratio \gls{cmrr}.  Such kind of problems can be solved by using instrumentation amplifier. Instrumentation amplifier is a high precision amplifier with an adjustable gain having high \gls{cmrr} and input impedance. It is a kind of differential amplifier with additional input buffers. It uses 3 operational amplifiers, the first two amplifier acts as the buffer which has very high input impedance and low output impedance and the latter one is used as a differential amplifier to amplify the signal applied to its input. The advantage of the input buffers stages makes it easy to match the impedance of the amplifier with the preceding stage. The inputs are applied to the first two operational amplifiers. The difference in the applied signal is only amplified by the amplifier but it rejects the common signal applied to its inputs. So whatever the environment is, the noise signal gets rejected. Its output impedance is very low so that there is low signal attenuation to transfer the whole amplified signal to the required circuit. Instrumentation amplifier is used for the higher accuracy and the stability of the circuit.
+The main disadvantages of the differential amplifier or single operational amplifier are its low input impedance and low common mode rejection ratio \gls{cmrr}.  Such kind of problems can be solved by using instrumentation amplifier. Instrumentation amplifier is a high precision amplifier with an adjustable gain having high \gls{cmrr} and input impedance. It is a kind of differential amplifier with additional input buffers. It uses 3 operational amplifiers, the first two amplifier acts as the buffer which has very high input impedance and low output impedance and the latter one is used as a differential amplifier to amplify the signal applied to its input. The advantage of the input buffers stages makes it easy to match the impedance of the amplifier with the preceding stage. The inputs are applied to the first two operational amplifiers. The difference in the applied signal is only amplified by the amplifier but it rejects the common signal applied to its inputs. So whatever the environment is, the noise signal gets rejected. Its output impedance is very low so that there is low signal attenuation to transfer the whole amplified signal to the required circuit. Instrumentation amplifier is used for the higher accuracy and the stability of the circuit.
 
 \input{InstrumentationAmplifier.tex}
 
@@ -128,7 +128,7 @@ Similarly, the \gls{cmrr} of the instrumentation amplifier can be written in ter
 \begin{equation}
 	CMRR_{ins-amp}=(1+2\frac{R_1}{R_gain})CMRR_{op-amp} \nonumber
 \end{equation}
-Hence the \gls{cmrr} of the intrumentation amplifier is $(1+2\frac{R_1}{R_{gain}})$ times greater than that of a single operational amplifier.
+Hence the \gls{cmrr} of the instrumentation amplifier is $(1+2\frac{R_1}{R_{gain}})$ times greater than that of a single operational amplifier.
 
 	
 Thus the low voltage signal received through the receiver of ultrasonic sensor is amplified using instrumentation amplifier circuit. The values of the component of this operational amplifier is calculated so that the required signal strength can be achieved. The amplified signal is now fed into the input of tone decoder circuit.
@@ -175,11 +175,11 @@ C = capacitor placed at Pin 6
 This IC sets it's output(Pin 8) to low when the frequency of incoming signal matches the frequency of internal oscillator. When there is incoming signal of other frequencies or there is no signal at all, the output(Pin 8) remains high. 
 We used a capacitor of 0.01$\mu$ F. In order to lock the frequency of internal oscillator at 40kHz, we need a resistor of approximately 2.272 K$\Omega$ . Now since exactly this value resistor was not available, we used a potentiometer of 10K instead of this resistor. 
 
-\subsubsection{Fixing the frequency of internal oscillator}
+\subsubsection{Fixing The Frequency of Internal Oscillator}
 
 To make sure that the tone decoder recognizes 40kHz signal and sets it output to low only on the arrival of 40kHz signal, the frequency of it's internal oscillator needs to be fixed at 40kHz. Since we do not have exactly 2.272K$\Omega$ resistor available, we use a potentiometer to adjust the frequency of internal oscillator.
 
-We fed a 40kHz sinusoidal signal to the input of the IL567 from function generator. Since the output of the IC is high when the frequency of incoming signal does not match the frequency of internal oscillator or also when there is no signal whatsoever, initially the output of this IC was high. Now the potentiometer was adjusted until the output of the IC was low. Thus, the frequency of internal oscillator of the IL567 was finalised to 40kHz.
+We fed a 40kHz sinusoidal signal to the input of the IL567 from function generator. Since the output of the IC is high when the frequency of incoming signal does not match the frequency of internal oscillator or also when there is no signal whatsoever, initially the output of this IC was high. Now the potentiometer was adjusted until the output of the IC was low. Thus, the frequency of internal oscillator of the IL567 was finalized to 40kHz.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.7]{Images/ToneDecoder.jpg}
@@ -204,7 +204,7 @@ Thus we can find the actual distance $x$ by this process.
 
 \input{SPIandUSB.tex}
 
-\subsection{Communication between Microcontroller and PC}
+\subsection{Communication Between Microcontroller and PC}
  V-USB is a very useful software-only implementation of low-speed USB device for AVR microcontrollers. It adds USB functionality for almost any AVR, particularly for those without hardware USB functionality. The communication with PC has two distinct parts:
 \begin{enumerate}
 	\item Firmware on Device
